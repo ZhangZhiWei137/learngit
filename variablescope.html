@@ -15,14 +15,15 @@
   <script type="text/javascript">
   
     // 全局变量，局部变量
-      var b="sum:";
+      var b="sum";
 	  function myFunction1() {
+      c = ':'// 全局变量
 		var a = 4;
-		return b + a * a;
+		return b + c + a * a;
 	}	  
 	function myFunction2() {
 		var a = 5;
-		return b + a * a;
+		return b + c + a * a;
 	}
     alert(myFunction1());
 	alert(myFunction2());
