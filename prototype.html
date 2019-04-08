@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>learn git</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="overflow-y:scroll; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';">
+  <div>
+    <!-- Main app markup goes here -->
+  </div>
+
+  <script type="text/javascript">
+    //原型继承
+	var Student = {
+		name: 'Robot',
+		height: 1.2,
+		run: function () {
+			console.log(this.name + ' is running...');
+		}
+	};
+
+	// 方法一： 直接把原型对象赋值给原型变量
+	var xiaoming = {
+		name: '小明'
+	};
+
+	//该方法不推荐！！！！
+	xiaoming.__proto__ = Student;
+	
+	console.log(xiaoming.name);
+	console.log(xiaoming.height);
+	xiaoming.run();
+	
+	// 方法二： 使用object.create()方法
+	function createStudent(name) {
+		// 基于Student原型创建一个新对象:
+		var s = Object.create(Student); // 使用object.create()方法传入原型对象，来继承
+		// 初始化新对象:
+		s.name = name;
+		return s;
+	}
+
+	var xiaoming = createStudent('小明');
+	xiaoming.run();
+	alert(xiaoming.__proto__ === Student); // true
+	
+	
+	//方法三: 构造函数
+	function Student2(name, height) {
+		this.name = name || "unknow";
+		this.height = height || 1.2;
+		this.run = function () {
+			console.log(this.name + ' is running...');
+		}
+    }
+	var xiaoming = new Student2('小明');//使用new Student2成了构造函数
+	console.log(xiaoming.name);
+	console.log(xiaoming.height);
+	xiaoming.run();
+	
+	//var xiaohong = Student2('小红', 1.5);//undefined function没return任何东西
+
+	
+	//1、不使用prototype属性定义的对象方法，是静态方法，只能直接用类名进行调用！另外，此静态方法中无法使用this变量来调用对象其他的属性！
+　　  //2、使用prototype属性定义的对象方法，是非静态方法，只有在实例化后才能使用！其方法内部可以this来引用对象自身中的其他属性！
+    var dom = function(){
+        
+    };
+
+    dom.Show = function(){
+        alert("Show Message");
+    };
+    
+    dom.prototype.Display = function(){
+        alert("Property Message");
+    };
+    //dom.Display(); //error
+    dom.Show();  
+	
+    var d = new dom();
+    d.Display();
+    //d.Show(); //error
+	
+  </script>
+  
+</body>
+
+</html>

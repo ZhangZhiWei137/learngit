@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>learn git</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="overflow-y:scroll; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';">
+  <div>
+    <!-- Main app markup goes here -->
+  </div>
+
+  <script type="text/javascript">
+	//Javascript闭包的用途 
+
+	//1、匿名自执行函数:函数只执行一次，比如UI的初始化
+	var data={
+	    table: [],
+		tree: {}
+	};
+	(function (dm){
+	    for(var i=0; i<dm.table.rows; i++){
+		    var row = dm.table.rows[i];
+			for(var j=0; j < row.cells; j++){
+			    drawCell(i, j);
+			}
+		}
+	}){data);
+	
+	//2、结果缓存
+	var CachedSearchBox = (function(){    
+		var cache = {},    
+		   count = [];    
+		return {    
+		   attachSearchBox : function(dsid){    
+			   if(dsid in cache){//如果结果在缓存中    
+				  return cache[dsid];//直接返回缓存中的对象    
+			   }    
+			   var fsb = new uikit.webctrl.SearchBox(dsid);//新建    
+			   cache[dsid] = fsb;//更新缓存    
+			   if(count.length > 100){//保正缓存的大小<=100    
+				  delete cache[count.shift()];    
+			   }    
+			   return fsb;          
+		   },    
+		 
+		   clearSearchBox : function(dsid){    
+			   if(dsid in cache){    
+				  cache[dsid].clearSelection();      
+			   }    
+		   }    
+		};    
+	})();    
+		 
+	CachedSearchBox.attachSearchBox("input");
+	
+	//3、封装
+	var person = function(){    
+    //变量作用域为函数内部，外部无法访问    
+    var name = "default";       
+       
+    return {    
+       getName : function(){    
+           return name;    
+       },    
+       setName : function(newName){    
+           name = newName;    
+       }    
+    }    
+	}();    
+		 
+	print(person.name);//直接访问，结果为undefined    
+	print(person.getName());    
+	person.setName("abruzzi");    
+	print(person.getName());   
+
+	//4. 实现和继承
+	function Person(){    
+    var name = "default";       
+       
+    return {    
+       getName : function(){    
+           return name;    
+       },    
+       setName : function(newName){    
+           name = newName;    
+       }    
+    }    
+    };   
+    var p = new Person();
+    p.setName("Tom");
+    alert(p.getName());
+
+    var Jack = function(){};
+    //继承自Person
+    Jack.prototype = new Person();
+    //添加私有方法
+    Jack.prototype.Say = function(){
+        alert("Hello,my name is Jack");
+    };
+    var j = new Jack();
+    j.setName("Jack");
+    j.Say();
+    alert(j.getName());
+  </script>
+  
+</body>
+
+</html>

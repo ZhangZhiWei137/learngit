@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>learn git</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="overflow-y:scroll; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';">
+  <div>
+    <!-- Main app markup goes here -->
+  </div>
+
+  <script type="text/javascript">
+	//第1种写法  
+	function Circle(r) {  
+		  this.r = r;  
+	}  
+	Circle.PI = 3.14159;  
+	Circle.prototype.area = function() {  
+	  return "1. 半径:"+this.r + "面积：" +Circle.PI * this.r * this.r;  
+	}  
+	  
+	var c = new Circle(1.0);     
+	alert(c.area());
+	
+	//第2种写法  
+	var Circle = function() {  
+	   var obj = new Object();  
+	   obj.PI = 3.14159;  
+		 
+	   obj.area = function( r ) {  
+		   return "2. 半径:"+ r + "面积：" +this.PI * r * r;  
+	   }  
+	   return obj;  
+	}  
+	  
+	var c = new Circle();  
+	alert( c.area( 1.0 ) ); 
+
+	//第3种写法  
+	var Circle = new Object();  
+	Circle.PI = 3.14159;  
+	Circle.Area = function( r ) {  
+		   return "3. 半径:"+ r + "面积：" +this.PI * r * r;  
+	}  
+	  
+	alert( Circle.Area( 1.0 ) ); 
+
+	//第4种写法  
+	var Circle={  
+	   "PI":3.14159,  
+	 "area":function(r){  
+			  return "4. 半径:"+ r + "面积：" +this.PI * r * r;  
+			}  
+	};  
+	alert( Circle.area(1.0) ); 
+
+	//第5种写法  
+	var Circle = new Function("this.PI = 3.14159;this.area = function( r ) {return  \"5. 半径:\" + r + \"面积：\" + r*r*this.PI;}");  
+	  
+	alert( (new Circle()).area(1.0) );  
+
+	
+	//第6种写法  
+	var Circle = {};  
+	Circle.PI = 3.14159;  
+	Circle.Area = function( r ) {  
+		   return "6. 半径:"+ r + "面积：" +this.PI * r * r;  
+	}  
+	  
+	alert( Circle.Area( 1.0 ) ); 
+	
+	///////////////////////////////////////////
+	//函数闭包
+	function add(){
+		var counter = 0;
+		function plus() {counter += 1;}
+		plus();    
+		return counter; 
+	}
+	alert("add:"+add());
+	
+	var add2 = (function () {
+		var counter = 0;
+		return function () {return counter += 1;}
+	})();
+	//var f2=add2;
+	alert("add2:"+add2());
+	alert("add2:"+add2());
+	
+  </script>
+  
+</body>
+
+</html>
