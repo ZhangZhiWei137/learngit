@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>learn git</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="overflow-y:scroll; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';">
+  <div>
+    <!-- Main app markup goes here -->
+  </div>
+
+  <script type="text/javascript">
+  
+    // 原生ajax
+    var xmlhttp;
+    if(window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    }else{
+        xmlhttp = ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    // send the request to server.
+    xmlhttp.open("get", url, true);  //true:异步 false:同步
+    xmlhttp.send();
+
+    // jQuery 中的 ajax
+    // $.ajax({
+    //     type: "get",
+    //     url: strUrl,
+    //     async: false,
+    //     data:{},
+    //     dataType: "json",
+    //     success:function(msg){
+    //         ...
+    //     },
+    //     error:function(msg){
+    //         ...
+    //     }
+    // })
+  </script>
+  
+</body>
+
+</html>

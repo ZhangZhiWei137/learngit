@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>learn git</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="overflow-y:scroll; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';">
+  <div>
+    <!-- Main app markup goes here -->
+  </div>
+
+  <script type="text/javascript">
+  
+    // 嵌套及字面量定义对象
+    var obj={
+        name: 'zzz',
+        age: 18
+    }
+    // JSON定义注意：
+    // 注意与嵌套字面量的区别
+    // 1. key必须由双引号包含
+    // 2. 末尾不能有分号
+    // 3. key不能重复
+    var aa={
+        "name": 'zzz',
+        "age": 18,
+        "hobby": ["sing", "dance"],
+        "work": {
+            "job": "web",
+            "address": "wulan"
+        },
+        "adult": true
+    }
+    console.log(JSON.stringify(aa));
+    console.log(JSON.stringify(aa, ["name", "hobby"]));//过滤
+
+  </script>
+  
+</body>
+
+</html>
