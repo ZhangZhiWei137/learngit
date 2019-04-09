@@ -23,7 +23,7 @@
 	}  
 	  
 	var c = new Circle(1.0);     
-	alert(c.area());
+	console.log(c.area());
 	
 	//第2种写法  
 	var Circle = function() {  
@@ -37,7 +37,7 @@
 	}  
 	  
 	var c = new Circle();  
-	alert( c.area( 1.0 ) ); 
+	console.log( c.area( 1.0 ) ); 
 
 	//第3种写法  
 	var Circle = new Object();  
@@ -46,7 +46,7 @@
 		   return "3. 半径:"+ r + "面积：" +this.PI * r * r;  
 	}  
 	  
-	alert( Circle.Area( 1.0 ) ); 
+	console.log( Circle.Area( 1.0 ) ); 
 
 	//第4种写法  
 	var Circle={  
@@ -55,12 +55,12 @@
 			  return "4. 半径:"+ r + "面积：" +this.PI * r * r;  
 			}  
 	};  
-	alert( Circle.area(1.0) ); 
+	console.log( Circle.area(1.0) ); 
 
 	//第5种写法  
 	var Circle = new Function("this.PI = 3.14159;this.area = function( r ) {return  \"5. 半径:\" + r + \"面积：\" + r*r*this.PI;}");  
 	  
-	alert( (new Circle()).area(1.0) );  
+	console.log( (new Circle()).area(1.0) );  
 
 	
 	//第6种写法  
@@ -70,7 +70,7 @@
 		   return "6. 半径:"+ r + "面积：" +this.PI * r * r;  
 	}  
 	  
-	alert( Circle.Area( 1.0 ) ); 
+	console.log( Circle.Area( 1.0 ) ); 
 	
 	///////////////////////////////////////////
 	//函数闭包
@@ -80,16 +80,41 @@
 		plus();    
 		return counter; 
 	}
-	alert("add:"+add());
+	console.log("add:"+add());
 	
 	var add2 = (function () {
 		var counter = 0;
 		return function () {return counter += 1;}
 	})();
 	//var f2=add2;
-	alert("add2:"+add2());
-	alert("add2:"+add2());
-	
+	console.log("add2:"+add2());
+	console.log("add2:"+add2());
+
+
+  
+	// 函数闭包
+	// var fun = (function(arr){
+	// 	var i=0;
+	// 	return function(){
+	// 		return arr[i++];
+	// 	}
+	// }(['1', '2', '3']))
+	// console.log(fun());
+	// console.log(fun());
+	// console.log(fun());
+
+  // 与上面的等价
+	// function fun(arr){
+	// 	var i=0;
+	// 	return function(){
+	// 		return arr[i++];
+	// 	}
+	// }
+	// var next = fun(['1', '2', '3']);
+	// console.log(next());
+	// console.log(next());
+	// console.log(next()); 
+
   </script>
   
 </body>

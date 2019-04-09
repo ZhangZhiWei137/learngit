@@ -22,19 +22,19 @@
 		}
 	};
 
-	// 方法一： 直接把原型对象赋值给原型变量
-	var xiaoming = {
+	// 1： 直接把原型对象赋值给原型变量=================================
+	var xiaoming1 = {
 		name: '小明'
 	};
 
 	//该方法不推荐！！！！
-	xiaoming.__proto__ = Student;
+	xiaoming1.__proto__ = Student;
 	
-	console.log(xiaoming.name);
-	console.log(xiaoming.height);
-	xiaoming.run();
+	console.log(xiaoming1.name);
+	console.log(xiaoming1.height);
+	xiaoming1.run();
 	
-	// 方法二： 使用object.create()方法
+	// 2： 使用object.create()方法=================================
 	function createStudent(name) {
 		// 基于Student原型创建一个新对象:
 		var s = Object.create(Student); // 使用object.create()方法传入原型对象，来继承
@@ -43,39 +43,64 @@
 		return s;
 	}
 
-	var xiaoming = createStudent('小明');
-	xiaoming.run();
-	alert(xiaoming.__proto__ === Student); // true
+	var xiaoming2 = createStudent('小明');
+	xiaoming2.run();
+	alert(xiaoming2.__proto__ === Student); // true
 	
 	
-	//方法三: 构造函数
-	function Student2(name, height) {
-		this.name = name || "unknow";
-		this.height = height || 1.2;
+	//3: 构造函数=================================
+	function Student2(name="unknow", height=165) {
+		this.name = name;
+		this.height = height;
 		this.run = function () {
 			console.log(this.name + ' is running...');
 		}
-    }
-	var xiaoming = new Student2('小明');//使用new Student2成了构造函数
-	console.log(xiaoming.name);
-	console.log(xiaoming.height);
-	xiaoming.run();
+		}
+	var xiaoming3 = new Student2('小明');//使用new Student2成了构造函数
+	console.log(xiaoming3.name);
+	console.log(xiaoming3.height);
+	xiaoming3.run();
+	console.log(Student2.prototype.isPrototypeOf(xiaoming3));
 	
 	//var xiaohong = Student2('小红', 1.5);//undefined function没return任何东西
 
-	
-	//1、不使用prototype属性定义的对象方法，是静态方法，只能直接用类名进行调用！另外，此静态方法中无法使用this变量来调用对象其他的属性！
-　　  //2、使用prototype属性定义的对象方法，是非静态方法，只有在实例化后才能使用！其方法内部可以this来引用对象自身中的其他属性！
+	// 4.1 继承--------方法一： 构造继承==================================
+	function Adult1(name, height, age){
+		Student2.call(this, name, height); 
+		this.age1 = age || 18,
+			this.run = function(){
+				console.log(this.name + " is riding...., age is " + this.age1);
+		}
+	}
+
+	var ad1 = new Adult1("小红", 160, 20);
+	ad1.run();
+
+	// 4.2 继承--------方法二： 原型链继承=================================
+	function Adult2(age){
+		this.age2 = age || 18,
+			this.run = function(){
+				console.log(this.__proto__.name + " is riding...., age is " + this.age2);
+		}
+	}
+	Adult2.prototype  = new Student2("小美", 180); 
+
+	var ad2 = new Adult2(30);
+	ad2.run();
+
+	// 5.
+	  //1、不使用prototype属性定义的对象方法，是静态方法，只能直接用类名进行调用！另外，此静态方法中无法使用this变量来调用对象其他的属性！
+　　//2、使用prototype属性定义的对象方法，是非静态方法，只有在实例化后才能使用！其方法内部可以this来引用对象自身中的其他属性！
     var dom = function(){
         
     };
 
     dom.Show = function(){
-        alert("Show Message");
+			console.log("Show Message");
     };
     
     dom.prototype.Display = function(){
-        alert("Property Message");
+			console.log("Property Message");
     };
     //dom.Display(); //error
     dom.Show();  

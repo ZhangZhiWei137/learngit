@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>learn git</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="overflow-y:scroll; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';">
+  <div>
+    <!-- Main app markup goes here -->
+  </div>
+
+  <script type="text/javascript">
+  
+    // 1. 字面量属性定义和获取 . [] 区别： .  取自身的属性  []可以是变量
+    var obj = new Object();
+    obj.name = "Alice";
+    obj['age'] = 18;// obj.age = 18;
+
+    var propertyStr = "name";
+    console.log(obj[propertyStr]);
+
+    propertyStr = "age";
+    console.log(obj[propertyStr]);
+
+    console.log(obj.name);
+    console.log(obj.age);
+
+    // 2. 属性的删除
+    delete obj.name;
+
+    // 3. 属性检测 1. in  2. hasOwnProperty()
+    var o={};
+    o.name = "Alice";
+    console.log('name1' in o);
+    console.log(o.hasOwnProperty('name'));// 或者 o['name'] == undefined
+    console.log(o['name'] !== undefined);  
+
+    // 4. 枚举属性
+    var oo = {x:1, y:2, z:"Alice"};
+    for(a in oo){
+        console.log(a + " value is:" +oo[a]);
+    }
+    var ooarr = [{x:1, y:2, z:"Alice"}, {x:11, y:22, z:"Alex"}];
+    for(a in ooarr){
+        console.log(a + " value is:" +ooarr[a]);
+    }
+
+    // for each循环数组的区别： 同步和异步
+
+    // 5. 序列化： 对象转化为json字符串
+    var oobj = {x:1, y:2, z:"Alice"};
+    var str = JSON.stringify(oobj); // 对象转成字符串   深拷贝
+    console.warn(str);
+    var oobj2 = JSON.Object()
+
+  </script>
+  
+</body>
+
+</html>

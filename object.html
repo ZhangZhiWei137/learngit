@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>learn git</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="overflow-y:scroll; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';">
+  <div>
+    <!-- Main app markup goes here -->
+  </div>
+
+  <script type="text/javascript">
+  
+    // 1. 通过new关键字创建对象
+    var obj1 = new Object();
+    obj1.name = "ZhangSan";
+    obj1.getName = function(){
+        return this.name;
+    }
+
+	// 2. 通过简单字面量创建对象
+    var obj2 = {};
+    obj2.name="ZhangSan";
+    obj2.getName = function(){
+        return this.name;
+    }
+
+    // 3. 通过嵌套字面量创建对象  
+    var obj2 = {
+        name: "ZhangSan",
+        getName: function(){
+            return this.name;
+        }
+        
+    }
+    
+    
+    // 函数声明(可在声明前调用)
+    function Add1(a, b){
+        return a+b;
+    }
+
+    // 函数表达式(不可在定义前调用)
+    var add2 = function(a,b){
+        return a+b;
+    }
+
+    // 构造函数
+    function Person(name, age){
+        this.name = name;
+        this.age = age;
+        this.getInfo=function(){
+            return this.name + '-' + this.age;
+        }
+    }
+    var person = new Person("Alice", 18);
+    console.log(person.getInfo());
+
+    // 使用函数封装(工厂模式)
+    function person2(name, age){
+        var obj = new Object();
+        obj.name = name;
+        obj.age = age;
+
+        return obj;
+    }
+    var p1 = person2(18, "Alice");
+  </script>
+  
+</body>
+
+</html>

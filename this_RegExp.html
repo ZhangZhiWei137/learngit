@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>learn git</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="overflow-y:scroll; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';">
+  <div>
+    <!-- Main app markup goes here -->
+  </div>
+
+  <script type="text/javascript">
+
+  // this关键字 一般情况下指向函数调用者
+
+  // 1. 函数中引用this, 指向window
+  var x=1;
+  (function test(){
+    var x = 10;
+    this.x = 2;
+  })();
+  console.log(x);
+
+  // 2.对象中引用this, 指向o对象
+  var o={};
+  o.a = 100;
+  o.action=function(){
+    return this.a;
+  }
+  console.warn(o.action());
+
+  // 3. 改变this指向 call(), apply()... ，在一个对象中调用另一个对象
+  var a = "111";
+  function test(){
+    return this.a;
+  }
+
+  var obj={};
+  obj.a = 200;
+  obj.action = test;
+  console.log(obj.action());
+  console.log(obj.action.call());
+  console.log(obj.action.call(obj));
+
+  // 4. 构造函数中引用this， 指向实例化对象
+  function Fun(name, age){
+    this.name = name;
+    this.age = age;
+  }
+
+  var oo1 = new Fun("Alice", 18);
+  var oo2 = new Fun("Alex", 20);
+  
+
+  // 5.
+  var number=1;
+  var aa={
+    number:2,
+    ShowNumber:function(){
+      this.number = 3;
+      (function(){
+        console.log(this.number); //1
+      })();
+      console.log(this.number);   //2=>3
+    }
+  };
+  aa.ShowNumber();
+
+  // 正则表达式
+  var filter = /^[A-Za-z]at$/;
+  //var filter = new RegExp('^[a-z]at$');
+  var value = "mat";
+  if(filter.test(value)){
+    console.log("ok");
+  }else{
+    console.log("error");
+  }
+
+  </script>
+  
+</body>
+
+</html>
