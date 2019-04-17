@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>learn git</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body
+  style="overflow-y:scroll; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';">
+  <div>
+    <!-- Main app markup goes here -->
+  </div>
+
+  <script src="https://cdn.bootcss.com/rxjs/6.0.0-alpha.3/Rx.js"></script>
+  <script type="text/javascript">
+
+    function foo() {
+      console.log("Hello world!");
+      return 42;
+    }
+
+    var x = foo.call();
+    var y = foo.apply();
+
+    var xx = foo;
+    var yy = xx();
+
+    //  ======================改变函数作用域======================
+    var name = '小白';
+
+    var obj = { name: '小红' };
+
+    function sayName() {
+      return this.name;
+    }
+
+    console.log(sayName.call(this));    //输出小白
+
+    console.log(sayName.call(obj));    //输入小红
+
+    // ======================高级用法，实现 js 继承======================
+    //父类 Person
+    function Person() {
+      this.sayName = function () {
+        return this.name;
+      }
+    }
+
+    //子类 Chinese
+    function Chinese(name) {
+      //借助 call 实现继承
+      Person.call(this);
+      this.name = name;
+
+      this.ch = function () {
+        alert('我是中国人');
+      }
+    }
+
+    //子类 America
+    function America(name) {
+      //借助 call 实现继承
+      Person.call(this);
+      this.name = name;
+
+      this.am = function () {
+        alert('我是美国人');
+      }
+    }
+
+
+    //测试
+    var chinese = new Chinese('成龙');
+    //调用 父类方法
+    console.log(chinese.sayName());   //输出 成龙
+
+    var america = new America('America');
+    //调用 父类方法
+    console.log(america.sayName());   //输出 America
+
+    ///////////////////////////////////////
+    var name = "小王", age = 17;
+    var obj = {
+      name: '小张',
+      objAge: this.age,
+      myFun: function () {
+        console.log(this.name + "年龄:" + this.age);
+      }
+    };
+
+    console.log(obj.objAge);  //17
+
+    obj.myFun()  //小张年龄undefined
+
+    ///////////////////////////////////////
+    var fav = "Alice";
+    function shows() {
+      console.log(this.fav);
+    }
+    shows();
+
+    ///////////////////////////////////////
+    var name = "小王", age = 17;
+    var obj = {
+      name: '小张',
+      objAge: this.age,
+      myFun: function (fm, to) {
+        console.log(this.name + "年龄:" + this.age, "来自:" + fm + " 去往:" + to);
+      }
+    };
+    var db = {
+      name: '德玛',
+      age: 99
+    }
+    obj.myFun.call(db, "成都", "上海");
+
+    obj.myFun.apply(db, ["成都", "上海"]);
+
+    obj.myFun.bind(db, '成都', '上海')();
+
+    obj.myFun.bind(db, ["成都", "上海"])();
+
+    /////////////generator（生成器）///////////////////////////
+    function* fib(max) {
+      var
+        t,
+        a = 0,
+        b = 1,
+        n = 0;
+      while (n < max) {
+        yield a;
+        [a, b] = [b, a + b];
+        n++;
+      }
+      return;
+    }
+    var f = fib(5);
+    console.log(f.next()); // {value: 0, done: false}
+    console.log(f.next()); // {value: 1, done: false}
+    console.log(f.next()); // {value: 1, done: false}
+    console.log(f.next()); // {value: 2, done: false}
+    console.log(f.next()); // {value: 3, done: false}
+    console.log(f.next()); // {value: undefined, done: true}
+
+
+    /////////Observer (观察者)///////////////////////////////////////////
+    var observable = Rx.Observable.create(function subscribe(observer) {
+      try {
+        observer.next(1)
+        observer.next(2)
+        observer.next(3)
+        observer.complete() // 不再发送任何值
+        observer.next(4) // 因为违反规约，所以不会发送
+      } catch (err) {
+        observer.error(err) // 如果捕获到异常会发送一个 JavaScript 错误 或 异常
+      }
+    })
+    observable.subscribe(x => { // 正常
+      console.log('观察者-正常')
+      console.log(x)
+    })
+    observable.subscribe(x => { // 模拟异常
+      throw new Error('抛出一个异常')
+      console.log('观察者-异常')
+      console.log(x)
+    })
+
+
+  </script>
+
+</body>
+
+</html>
