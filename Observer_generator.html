@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>learn git</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body
+  style="overflow-y:scroll; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';">
+  <div>
+    <!-- Main app markup goes here -->
+  </div>
+
+  <script src="https://cdn.bootcss.com/rxjs/6.0.0-alpha.3/Rx.js"></script>
+  <script type="text/javascript">
+    /////////////generator（生成器）///////////////////////////
+    function* fib(max) {
+      var
+        t,
+        a = 0,
+        b = 1,
+        n = 0;
+      while (n < max) {
+        yield a;
+        [a, b] = [b, a + b];
+        n++;
+      }
+      return;
+    }
+    var f = fib(5);
+    console.log(f.next()); // {value: 0, done: false}
+    console.log(f.next()); // {value: 1, done: false}
+    console.log(f.next()); // {value: 1, done: false}
+    console.log(f.next()); // {value: 2, done: false}
+    console.log(f.next()); // {value: 3, done: false}
+    console.log(f.next()); // {value: undefined, done: true}
+
+
+    /////////Observer (观察者)///////////////////////////////////////////
+    var observable = Rx.Observable.create(function subscribe(observer) {
+      try {
+        observer.next(1)
+        observer.next(2)
+        observer.next(3)
+        observer.complete() // 不再发送任何值
+        observer.next(4) // 因为违反规约，所以不会发送
+      } catch (err) {
+        observer.error(err) // 如果捕获到异常会发送一个 JavaScript 错误 或 异常
+      }
+    })
+    observable.subscribe(x => { // 正常
+      console.log('观察者-正常')
+      console.log(x)
+    })
+    observable.subscribe(x => { // 模拟异常
+      throw new Error('抛出一个异常')
+      console.log('观察者-异常')
+      console.log(x)
+    })
+    
+  </script>
+
+</body>
+
+</html>

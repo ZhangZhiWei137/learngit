@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>learn git</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body
+  style="overflow-y:scroll; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';">
+  <div>
+    <!-- Main app markup goes here -->
+  </div>
+
+  <script type="text/javascript">
+
+    // ===========实现 js 继承======================
+    //父类 Person
+    function Person() {
+      this.sayName = function () {
+        return this.name;
+      }
+    }
+
+    //子类 Chinese
+    function Chinese(name) {
+      //借助 call 实现继承
+      Person.call(this);
+      this.name = name;
+
+      this.ch = function () {
+        alert('我是中国人');
+      }
+    }
+
+    //子类 America
+    function America(name) {
+      //借助 call 实现继承
+      Person.call(this);
+      this.name = name;
+
+      this.am = function () {
+        alert('我是美国人');
+      }
+    }
+
+    //测试
+    var chinese = new Chinese('成龙');
+    //调用 父类方法
+    console.log(chinese.sayName());   //输出 成龙
+    var america = new America('America');
+    //调用 父类方法
+    console.log(america.sayName());   //输出 America
+
+
+    /////////////class//////////////////////////////
+    class Student {
+      constructor(name) {
+        this.name = name;
+      }
+
+      hello() {
+        alert('Hello, ' + this.name + '!');
+      }
+    }
+    var xiaoming = new Student('小明');
+    xiaoming.hello();
+    
+    
+  </script>
+
+</body>
+
+</html>
